@@ -13,9 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from shielddash.api.views import RetentionView
+from django.conf.urls import include, url
+from django.contrib import admin
+
+from .studies.views import StudyListView
+
 
 urlpatterns = [
-    url(r'^retention/', RetentionView.as_view(), name='retention'),
+    url(r'^studies/', StudyListView.as_view(), name='study-list'),
+    url(r'^admin/', include(admin.site.urls)),
 ]
