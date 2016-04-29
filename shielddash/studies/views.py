@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
 
 from .filters import StudyFilter
@@ -8,6 +9,7 @@ from .serializers import StudySerializer
 
 
 class StudyListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Study.objects.all()
     serializer_class = StudySerializer
     filter_backends = (filters.DjangoFilterBackend,)

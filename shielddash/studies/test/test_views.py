@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils import timezone
 from rest_framework.reverse import reverse
@@ -25,6 +26,10 @@ class TestStudyView(TestCase):
             start_time=self.start,
             end_time=self.end,
         )
+        u = get_user_model().objects.create(username='example@mozilla.com')
+        u.set_password('example')
+        u.save()
+        self.client.login(username='example@mozilla.com', password='example')
 
     def test_basic(self):
         """
