@@ -35,19 +35,39 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'shielddash.api',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.staticfiles',
+    'shielddash.studies',
 ]
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'shielddash.middleware.CORSMiddleware'
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'shielddash.middleware.CORSMiddleware',
 ]
 
 ROOT_URLCONF = 'shielddash.urls'
 
-TEMPLATES = []
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ]
+        }
+    },
+]
 
 WSGI_APPLICATION = 'shielddash.wsgi.application'
 
@@ -74,7 +94,9 @@ USE_I18N = False
 
 USE_L10N = False
 
-USE_TZ = False
+USE_TZ = True
+
+STATIC_URL = '/static/'
 
 
 REST_FRAMEWORK = {
