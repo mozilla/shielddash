@@ -82,6 +82,9 @@ def aggUU(agg1, agg2):
 for study in studies:
     study_id, study_name, study_start, study_end = study
 
+    # Clear study states.
+    cur.execute('DELETE FROM studies_state WHERE study_id=%s', [study_id])
+
     kwargs = {
         'doc_type': 'OTHER',
         'submission_date': (study_start.strftime('%Y%m%d'),
