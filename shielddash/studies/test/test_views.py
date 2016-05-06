@@ -1,10 +1,12 @@
+import random
 from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils import timezone
 from rest_framework.reverse import reverse
 
-from ..models import Study
+from ..models import State, Study
 
 
 def iso(dt):
@@ -14,22 +16,50 @@ def iso(dt):
     return unicode(value)
 
 
+def create_test_user():
+    user = get_user_model().objects.create(username='example@mozilla.com')
+    user.set_password('password')
+    user.save()
+    return user
+
+
+def create_test_study():
+    start = timezone.now()
+    end = start + timedelta(hours=1)
+    return Study.objects.create(
+        name=u'test study',
+        description=u'some description',
+        start_time=start,
+        end_time=end,
+    )
+
+
+def create_test_state(study):
+    for channel in ('release', 'beta', 'aurora', 'nightly'):
+        for variation in ('aggressive', 'medium', 'weak', 'ut'):
+            State.objects.create(
+                study=study,
+                channel=channel,
+                variation=variation,
+                completed=random.randint(0, 1),
+                ineligible=random.randint(0, 1),
+                installed=random.randint(0, 1),
+                left_study=random.randint(0, 1),
+                seen1=random.randint(0, 1),
+                seen2=random.randint(0, 1),
+                seen3=random.randint(0, 1),
+                seen7=random.randint(0, 1),
+                created=timezone.now()
+            )
+
+
 class TestStudyView(TestCase):
 
     def setUp(self):
         self.url = reverse('study-list')
-        self.start = timezone.now()
-        self.end = self.start + timedelta(hours=1)
-        self.study = Study.objects.create(
-            name=u'test study',
-            description=u'some description',
-            start_time=self.start,
-            end_time=self.end,
-        )
-        u = get_user_model().objects.create(username='example@mozilla.com')
-        u.set_password('example')
-        u.save()
-        self.client.login(username='example@mozilla.com', password='example')
+        self.study = create_test_study()
+        self.user = create_test_user()
+        self.client.login(username=self.user.username, password='password')
 
     def test_basic(self):
         """
@@ -53,8 +83,8 @@ class TestStudyView(TestCase):
         Requests for current date range returns study data.
         """
         response = self.client.get(self.url, data={
-            'start': self.start.strftime('%Y%m%d'),
-            'end': self.end.strftime('%Y%m%d'),
+            'start': self.study.start_time.strftime('%Y%m%d'),
+            'end': self.study.end_time.strftime('%Y%m%d'),
         })
         data = response.json()
         self.assertTrue(data['studies'])
@@ -63,11 +93,33 @@ class TestStudyView(TestCase):
         """
         Requests for future date range returns no study data.
         """
-        start = self.start + timedelta(days=1)
-        end = self.end + timedelta(days=1)
+        start = self.study.start_time + timedelta(days=1)
+        end = self.study.end_time + timedelta(days=1)
         response = self.client.get(self.url, data={
             'start': start.strftime('%Y%m%d'),
             'end': end.strftime('%Y%m%d'),
         })
         data = response.json()
         self.assertFalse(data['studies'])
+
+
+class TestStudyDetailView(TestCase):
+
+    def setUp(self):
+        self.study = create_test_study()
+        self.state = create_test_state(self.study)
+        self.url = reverse('study-detail', args=[self.study.id])
+        self.user = create_test_user()
+        self.client.login(username=self.user.username, password='password')
+
+    def test_basic(self):
+        """
+        Test basic shape of the study detail API.
+        """
+        response = self.client.get(self.url)
+        data = response.json()
+        self.assertEqual(data['study'], self.study.name)
+        self.assertEqual(sorted(data['channels'].keys()),
+                         sorted(['release', 'beta', 'aurora', 'nightly']))
+        self.assertEqual(sorted(data['channels']['release'].keys()),
+                         sorted(['aggressive', 'medium', 'weak', 'ut']))
