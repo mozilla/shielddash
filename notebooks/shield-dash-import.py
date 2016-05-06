@@ -1,6 +1,8 @@
 import datetime
 from operator import itemgetter
 
+import boto3
+import psycopg2
 import ujson
 from moztelemetry import get_pings
 
@@ -22,8 +24,12 @@ def getShieldProps(p):
     }
     for k in ['firstrun', 'msg', 'name', 'variation']:
         if k == 'firstrun':
-            out[k] = datetime.datetime.utcfromtimestamp(
-                int(p['payload'][k]) // 1e3)
+            firstrun = p['payload'].get(k)
+            if firstrun is None:
+                out[k] = out['creation_date']
+            else:
+                out[k] = datetime.datetime.utcfromtimestamp(
+                    int(firstrun) // 1e3)
         else:
             out[k] = p['payload'][k]
     return out
@@ -88,7 +94,25 @@ def aggUU(agg1, agg2):
 
 states = (pings.keyBy(itemgetter('client_id'))
                .aggregateByKey(summaryProto, aggUV, aggUU)).values()
+statesdata = states.collect()
 
-# TODO: Replace with direct push to postgresql.
-with open('output/shield-dash.json', 'w') as _file:
-    ujson.dump(states.collect(), _file)
+s3 = boto3.resource("s3")
+metasrcs = ujson.load(s3.Object("net-mozaws-prod-us-west-2-pipeline-metadata",
+                               "sources.json").get()["Body"])
+creds = ujson.load(s3.Object("net-mozaws-prod-us-west-2-pipeline-metadata",
+                  metasrcs["shielddash-db"]["metadata_prefix"] +
+                  "/write/credentials.json").get()["Body"])
+
+conn = psycopg2.connect(dbname=creds["db_name"], host=creds["host"], port=creds["port"],
+                        user=creds["username"], password=creds["password"])
+
+c = conn.cursor()
+c.execute("""
+INSERT INTO studies_study (name, description, start_time)
+       SELECT %s, %s, %s
+       WHERE NOT EXISTS (SELECT 1 FROM studies_study WHERE name = %s);""", (STUDY_NAME, STUDY_NAME, STUDY_START, STUDY_NAME))
+
+for st in statesdata:
+    c.execute("""INSERT INTO studies_state (created, study_id, channel, variation, completed, ineligible, installed, left_study, seen1, seen2, seen3, seen7)
+SELECT NOW(), studies_study.id, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s from studies_study where name = %s""",
+         (st['channel'], st['variation'], st['completed'], st['ineligible'], st['installed'], st['left_study'], st['seen1'], st['seen2'], st['seen3'], st['seen7'], STUDY_NAME))
