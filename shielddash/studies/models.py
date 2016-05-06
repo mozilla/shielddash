@@ -7,6 +7,7 @@ class Study(models.Model):
     description = models.TextField(default='')
     start_time = models.DateTimeField(blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True)
+    # TODO: Add last_updated to studies_study for a dead man's switch.
 
     class Meta:
         verbose_name = 'study'
