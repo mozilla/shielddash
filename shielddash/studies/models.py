@@ -33,4 +33,4 @@ class State(models.Model):
     created = models.DateTimeField(default=timezone.now)
 
     def __unicode__(self):
-        return self.id
+        return str(self.id)

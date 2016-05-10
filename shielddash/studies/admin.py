@@ -12,6 +12,7 @@ class StudyAdmin(admin.ModelAdmin):
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):
     list_display = [
+        'id',
         'study',
         'channel',
         'variation',
@@ -26,6 +27,7 @@ class StateAdmin(admin.ModelAdmin):
         'seen7',
     ]
     list_filter = ['study', 'variation', 'channel']
+    list_display_links = ['id', 'study']
     date_hierarchy = 'created'
     raw_id_fields = ['study']
     show_full_result_count = False
