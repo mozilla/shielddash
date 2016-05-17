@@ -112,9 +112,13 @@ STATIC_URL = '/static/'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES':
-    ('rest_framework.authentication.SessionAuthentication',
-     'shielddash.studies.authentication.GoogleJSONWebTokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'shielddash.studies.authentication.GoogleJSONWebTokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'shielddash.studies.authentication.OptionsOrIsAuthenticated',
+    ),
 }
 
 

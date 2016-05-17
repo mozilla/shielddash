@@ -3,7 +3,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework import filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import ListAPIView
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .filters import StudyFilter
@@ -13,7 +12,6 @@ from .serializers import StudySerializer
 
 
 class StudyListView(ListAPIView):
-    permission_classes = (IsAuthenticated,)
     queryset = Study.objects.all()
     serializer_class = StudySerializer
     filter_backends = (filters.DjangoFilterBackend,)
@@ -23,7 +21,6 @@ class StudyListView(ListAPIView):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def study_detail(request, study_id):
     study = get_object_or_404(Study, pk=study_id)
     with connection.cursor() as cursor:

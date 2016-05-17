@@ -1,11 +1,24 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
+from rest_framework import exceptions
 from rest_framework.authentication import (BaseAuthentication,
                                            get_authorization_header)
-from rest_framework import exceptions
+from rest_framework.permissions import IsAuthenticated
 
 from oauth2client import client, crypt
+
+
+class OptionsOrIsAuthenticated(IsAuthenticated):
+    """
+    This allows OPTIONS requests to pass without auth but falls back to the
+    built-in ``rest_framework.permissions.IsAuthenticated``.
+    """
+    def has_permission(self, request, view):
+        if request.method == 'OPTIONS':
+            return True
+        return super(OptionsOrIsAuthenticated, self).has_permission(request,
+                                                                    view)
 
 
 class GoogleJSONWebTokenAuthentication(BaseAuthentication):
