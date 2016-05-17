@@ -85,7 +85,7 @@ class TestStudyView(TestCase):
         self.assertEqual(response['Access-Control-Allow-Methods'],
                          'GET, HEAD, OPTIONS')
         self.assertEqual(response['Access-Control-Allow-Headers'],
-                         'Content-Type')
+                         'Authorization, Content-Type')
 
     def test_date_range_with_results(self):
         """
@@ -127,7 +127,7 @@ class TestStudyDetailView(TestCase):
         self.assertEqual(response['Access-Control-Allow-Methods'],
                          'GET, HEAD, OPTIONS')
         self.assertEqual(response['Access-Control-Allow-Headers'],
-                         'Content-Type')
+                         'Authorization, Content-Type')
 
     def test_basic(self):
         """
