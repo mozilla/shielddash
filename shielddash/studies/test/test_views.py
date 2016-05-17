@@ -110,12 +110,12 @@ class TestStudyDetailView(TestCase):
         self.state = create_test_state(self.study)
         self.url = reverse('study-detail', args=[self.study.id])
         self.user = create_test_user()
-        self.client.login(username=self.user.username, password='password')
 
     def test_basic(self):
         """
         Test basic shape of the study detail API.
         """
+        self.client.login(username=self.user.username, password='password')
         response = self.client.get(self.url)
         data = response.json()
         self.assertEqual(data['study'], self.study.name)
@@ -123,3 +123,12 @@ class TestStudyDetailView(TestCase):
                          sorted(['release', 'beta', 'aurora', 'nightly']))
         self.assertEqual(sorted(data['channels']['release'].keys()),
                          sorted(['aggressive', 'medium', 'weak', 'ut']))
+
+    def test_no_auth(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 403)
+
+        self.client.login(username=self.user.username, password='password')
+
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)

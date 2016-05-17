@@ -18,9 +18,9 @@ env:
         - DEBIAN_FRONTEND=noninteractive
         - DJANGO_SETTINGS_MODULE=shielddash.settings
 before_install:
-    - pip install -U pip tox
+    - pip install -U pip
 install:
-    - pip install -r requirements.txt
+    - pip install tox
 before_script:
     - psql -c 'create database shielddash_test;' -U postgres
 script: tox -v
