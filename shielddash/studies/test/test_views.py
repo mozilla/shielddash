@@ -78,6 +78,15 @@ class TestStudyView(TestCase):
             ]
         })
 
+    def test_headers(self):
+        response = self.client.options(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Access-Control-Allow-Origin'], '*')
+        self.assertEqual(response['Access-Control-Allow-Methods'],
+                         'GET, HEAD, OPTIONS')
+        self.assertEqual(response['Access-Control-Allow-Headers'],
+                         'Content-Type')
+
     def test_date_range_with_results(self):
         """
         Requests for current date range returns study data.
@@ -110,6 +119,15 @@ class TestStudyDetailView(TestCase):
         self.state = create_test_state(self.study)
         self.url = reverse('study-detail', args=[self.study.id])
         self.user = create_test_user()
+
+    def test_headers(self):
+        response = self.client.options(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Access-Control-Allow-Origin'], '*')
+        self.assertEqual(response['Access-Control-Allow-Methods'],
+                         'GET, HEAD, OPTIONS')
+        self.assertEqual(response['Access-Control-Allow-Headers'],
+                         'Content-Type')
 
     def test_basic(self):
         """
