@@ -1,7 +1,7 @@
 from django.db import connection
 from django.shortcuts import get_object_or_404
 from rest_framework import filters
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
