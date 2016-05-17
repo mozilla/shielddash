@@ -35,14 +35,18 @@ class GoogleJSONWebTokenAuthentication(BaseAuthentication):
                 raise crypt.AppIdentityError("Wrong issuer.")
             if idinfo['hd'] != settings.GOOGLE_AUTH_HOSTED_DOMAIN:
                 raise crypt.AppIdentityError("Wrong hosted domain.")
-        except crypt.AppIdentityError, e:
+        except crypt.AppIdentityError as e:
             return exceptions.AuthenticationFailed(e)
-        (u, isCreated) = get_user_model().objects.get_or_create(
-            username=idinfo['email'],
-            email=idinfo['email'],
-            first_name=idinfo['given_name'],
-            last_name=idinfo['family_name'])
-        return (u, idinfo)
+
+        defaults = {
+            'email': idinfo['email'],
+            'first_name': idinfo['given_name'],
+            'last_name': idinfo['family_name'],
+        }
+        user, created = get_user_model().objects.get_or_create(
+            username=idinfo['email'], defaults=defaults,
+        )
+        return user, idinfo
 
 
 google_auth = GoogleJSONWebTokenAuthentication()
