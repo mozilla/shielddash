@@ -40,7 +40,7 @@ class GoogleJSONWebTokenAuthentication(BaseAuthentication):
     def authenticate(self, request):
         token = self.get_jwt_value(request)
         if token is None:
-            return None
+            return None, None
         try:
             idinfo = client.verify_id_token(token, settings.GOOGLE_AUTH_KEY)
             if idinfo['iss'] not in ['accounts.google.com',
@@ -49,7 +49,7 @@ class GoogleJSONWebTokenAuthentication(BaseAuthentication):
             if idinfo['hd'] != settings.GOOGLE_AUTH_HOSTED_DOMAIN:
                 raise crypt.AppIdentityError("Wrong hosted domain.")
         except crypt.AppIdentityError as e:
-            return exceptions.AuthenticationFailed(e)
+            raise exceptions.AuthenticationFailed(e)
 
         defaults = {
             'email': idinfo['email'],
