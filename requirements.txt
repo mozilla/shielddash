@@ -9,7 +9,6 @@ oauth2client==2.0.2
 psycopg2==2.6.1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
-PyJWT==0.4.1
 python-decouple==3.0
 requests==2.5.1
 rsa==3.4.2
