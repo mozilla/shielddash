@@ -126,6 +126,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-GOOGLE_AUTH_KEY = config('GOOGLE_AUTH_KEY', '676697640342-o9mhtndrj60dk7jksdmmunetfmuqng4q.apps.googleusercontent.com')
-GOOGLE_AUTH_SECRET = config('GOOGLE_AUTH_SECRET', '_HoDDGIq_ZrhBiES-ozIhUgh')
+# Keys created from https://console.developers.google.com/apis/credentials
+GOOGLE_AUTH_KEY = config('GOOGLE_AUTH_KEY', None)
+GOOGLE_AUTH_SECRET = config('GOOGLE_AUTH_SECRET', None)
 GOOGLE_AUTH_HOSTED_DOMAIN = 'mozilla.com'
