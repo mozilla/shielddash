@@ -29,7 +29,10 @@ cur = conn.cursor()
 
 
 # Get the studies we need to gather data for.
-cur.execute('SELECT id, name, start_time, end_time FROM studies_study')
+today = datetime.date.today()
+cur.execute('SELECT id, name, start_time, end_time '
+            'FROM studies_study '
+            'WHERE start_time <= %s AND end_time > %s', [today, today])
 studies = cur.fetchall()
 
 
