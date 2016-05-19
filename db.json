@@ -1,0 +1,160 @@
+{
+  "studies": {
+    "studies": [
+      {
+        "id": 1,
+        "name": "Fake Study A",
+        "description": "This study focuses on the lorem ipsum of carpe diem. Erat ocurreret vel at, causae commodo eam cu, tritani saperet recusabo ex mea. Eum delenit praesent salutandi et, augue legimus hendrerit pri at. Id vis everti vocibus, velit accusata delicata vim no. Soleat torquatos ut has, porro recusabo id quo."
+      },
+      {
+        "id": 2,
+        "name": "Fake Study B",
+        "description": "This study focuses on the lorem ipsum of carpe diem. Erat ocurreret vel at, causae commodo eam cu, tritani saperet recusabo ex mea. Eum delenit praesent salutandi et, augue legimus hendrerit pri at. Id vis everti vocibus, velit accusata delicata vim no. Soleat torquatos ut has, porro recusabo id quo."
+      },
+      {
+        "id": 3,
+        "name": "Fake Study C",
+        "description": "This study focuses on the lorem ipsum of carpe diem. Erat ocurreret vel at, causae commodo eam cu, tritani saperet recusabo ex mea. Eum delenit praesent salutandi et, augue legimus hendrerit pri at. Id vis everti vocibus, velit accusata delicata vim no. Soleat torquatos ut has, porro recusabo id quo."
+      },
+      {
+        "id": 4,
+        "name": "Fake Study D",
+        "description": "This study focuses on the lorem ipsum of carpe diem. Erat ocurreret vel at, causae commodo eam cu, tritani saperet recusabo ex mea. Eum delenit praesent salutandi et, augue legimus hendrerit pri at. Id vis everti vocibus, velit accusata delicata vim no. Soleat torquatos ut has, porro recusabo id quo."
+      }
+    ]
+  },
+  "studys": [
+    {
+      "id": 4,
+      "study": "screen Performance X1",
+      "channels": {
+        "release": {
+          "medium": {
+            "seen7": 155,
+            "ineligible": 15,
+            "left_study": 195,
+            "seen3": 286,
+            "seen2": 293,
+            "seen1": 320,
+            "installed": 440,
+            "completed": 163
+          },
+          "weak": {
+            "seen7": 144,
+            "ineligible": 16,
+            "left_study": 190,
+            "seen3": 252,
+            "seen2": 271,
+            "seen1": 297,
+            "installed": 408,
+            "completed": 155
+          },
+          "aggressive": {
+            "seen7": 142,
+            "ineligible": 15,
+            "left_study": 180,
+            "seen3": 223,
+            "seen2": 252,
+            "seen1": 265,
+            "installed": 367,
+            "completed": 151
+          },
+          "ut": {
+            "seen7": 166,
+            "ineligible": 13,
+            "left_study": 205,
+            "seen3": 280,
+            "seen2": 310,
+            "seen1": 321,
+            "installed": 441,
+            "completed": 177
+          }
+        },
+        "aurora": {
+          "medium": {
+            "seen7": 19,
+            "ineligible": 1,
+            "left_study": 25,
+            "seen3": 26,
+            "seen2": 28,
+            "seen1": 26,
+            "installed": 47,
+            "completed": 22
+          },
+          "weak": {
+            "seen7": 14,
+            "ineligible": 0,
+            "left_study": 20,
+            "seen3": 21,
+            "seen2": 20,
+            "seen1": 20,
+            "installed": 38,
+            "completed": 18
+          },
+          "aggressive": {
+            "seen7": 13,
+            "ineligible": 2,
+            "left_study": 21,
+            "seen3": 25,
+            "seen2": 21,
+            "seen1": 27,
+            "installed": 42,
+            "completed": 17
+          },
+          "ut": {
+            "seen7": 23,
+            "ineligible": 0,
+            "left_study": 30,
+            "seen3": 38,
+            "seen2": 40,
+            "seen1": 42,
+            "installed": 53,
+            "completed": 26
+          }
+        },
+        "beta": {
+          "medium": {
+            "seen7": 21,
+            "ineligible": 2,
+            "left_study": 26,
+            "seen3": 37,
+            "seen2": 39,
+            "seen1": 45,
+            "installed": 50,
+            "completed": 24
+          },
+          "weak": {
+            "seen7": 30,
+            "ineligible": 3,
+            "left_study": 34,
+            "seen3": 43,
+            "seen2": 44,
+            "seen1": 42,
+            "installed": 56,
+            "completed": 29
+          },
+          "aggressive": {
+            "seen7": 31,
+            "ineligible": 2,
+            "left_study": 41,
+            "seen3": 54,
+            "seen2": 54,
+            "seen1": 60,
+            "installed": 70,
+            "completed": 36
+          },
+          "ut": {
+            "seen7": 29,
+            "ineligible": 3,
+            "left_study": 38,
+            "seen3": 47,
+            "seen2": 52,
+            "seen1": 53,
+            "installed": 56,
+            "completed": 32
+          }
+        }
+      }
+    }
+  ]
+}
