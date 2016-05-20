@@ -2,3 +2,9 @@
 .env
 staticfiles/
 .tox
+env/
+
+node_modules/
+npm-debug.log
+
+shielddash/core/static/**/bundle.*
