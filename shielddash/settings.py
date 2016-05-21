@@ -111,7 +111,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SECURE_SSL_REDIRECT = config('SSL', False)
+SECURE_SSL_REDIRECT = config('SSL_REDIRECT', default=False, cast=bool)
 SECURE_HSTS_SECONDS = (60 * 60 * 24 * 365)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
