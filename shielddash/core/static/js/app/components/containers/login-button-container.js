@@ -17,9 +17,15 @@ const LoginContainer = React.createClass({
   },
   componentDidMount: function() {
     gapi.load('auth2', function() {
+      var clientElm = document.querySelector('meta[name=google-signin-client_id]');
+      if (!clientElm) {
+        console.error('No google auth client ID metadata found in root HTML document.');
+        return;
+      }
+
       // Yep - that's a global auth singleton.
       window.auth2 = gapi.auth2.init({
-        client_id: '263509446425-83g1gv3eus8qe7ss2hgr6ec7hc6krkaf.apps.googleusercontent.com'
+        client_id: clientElm.getAttribute('content')
       });
     });
   },
