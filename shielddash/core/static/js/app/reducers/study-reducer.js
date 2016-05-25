@@ -12,6 +12,7 @@ const initialState = {
   isFetching: false,
   status: 200,
   studies: [],
+  showPercentage: false,
   study: {
     channels: {
       release: channel,
@@ -42,6 +43,11 @@ const studyReducer = function(state = initialState, action) {
       return Object.assign({}, state, {isFetching: false, study: action.study, totals: action.totals});
     case types.GET_STUDY_FAILURE:
       return Object.assign({}, state, {isFetching: false, status: action.status});
+
+    case types.SHOW_PERCENT_VALUES:
+      return Object.assign({}, state, {showPercentage: true});
+    case types.HIDE_PERCENT_VALUES:
+      return Object.assign({}, state, {showPercentage: false});
   }
 
   return state;

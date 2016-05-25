@@ -80,3 +80,15 @@ export function getStudyFailure(errCode) {
     status: errCode
   };
 }
+
+export function showPercentValues() {
+  return {
+    type: types.SHOW_PERCENT_VALUES
+  };
+}
+
+export function hidePercentValues() {
+  return {
+    type: types.HIDE_PERCENT_VALUES
+  };
+}
