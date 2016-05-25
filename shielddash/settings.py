@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 import dj_database_url
-import raven
 from decouple import config
 
 
@@ -144,5 +143,4 @@ if SENTRY_DSN:
     ]
     RAVEN_CONFIG = {
         'dsn': SENTRY_DSN,
-        'release': raven.fetch_git_sha(BASE_DIR),
     }
