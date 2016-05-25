@@ -22,9 +22,12 @@ const StudyResultsRow = React.createClass({
       <li className="study-results-row">
         <span>{this.props.type}</span>
         {studyFields.map(field => {
+          let count = this.props.channel[this.props.type][field];
+          let percent = Math.round(count / this.props.totals[field] * 100);
           return (
             <span className={isFieldFaded(field) ? 'study-field-faded' : ''}>
-              {this.props.channel[this.props.type][field]}
+              <b className="count">{count}</b>
+              <b className="percent">{percent + '%'}</b>
             </span>
           );
         })}
@@ -38,7 +41,7 @@ export default function(props) {
     <ul>
       {Object.keys(props.channel).map(type => {
         return (
-          <StudyResultsRow channel={props.channel} type={type} />
+          <StudyResultsRow channel={props.channel} type={type} totals={props.totals} />
         );
       })}
       <StudyResultsRow isTotalsRow={true} totals={props.totals} />

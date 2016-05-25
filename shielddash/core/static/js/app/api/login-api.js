@@ -15,7 +15,7 @@ export function performSignIn() {
     localStorage.setItem('user_token', user.token);
 
     store.dispatch(getLoginSuccess(user));
-    console.log('user signed in:', user.name);
+    console.log('signed in:', user.name);
     browserHistory.push('/');
     // Refresh the dashboard with new auth credentials.
     // There might be a better way to do this.

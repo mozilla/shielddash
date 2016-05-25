@@ -21,7 +21,8 @@ const mapStateToProps = function(store) {
     isFetching: store.studyState.isFetching,
     study: store.studyState.study,
     totals: store.studyState.totals,
-    status: store.studyState.status
+    status: store.studyState.status,
+    showPercentage: store.studyState.showPercentage
   };
 }
 
