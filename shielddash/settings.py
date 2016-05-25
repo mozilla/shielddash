@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 import dj_database_url
+import raven
 from decouple import config
 
 
@@ -34,7 +35,6 @@ ALLOWED_HOSTS = ['*']
 STATIC_ROOT = config('STATIC_ROOT', default=os.path.join(BASE_DIR,
                                                          'staticfiles'))
 STATIC_URL = config('STATIC_URL', '/static/')
-
 
 # Application definition
 
@@ -134,3 +134,15 @@ AUTHENTICATION_BACKENDS = (
 GOOGLE_AUTH_KEY = config('GOOGLE_AUTH_KEY', None)
 GOOGLE_AUTH_SECRET = config('GOOGLE_AUTH_SECRET', None)
 GOOGLE_AUTH_HOSTED_DOMAIN = 'mozilla.com'
+
+
+# Sentry set up.
+SENTRY_DSN = config('SENTRY_DSN', default=None)
+if SENTRY_DSN:
+    INSTALLED_APPS = INSTALLED_APPS + [
+        'raven.contrib.django.raven_compat',
+    ]
+    RAVEN_CONFIG = {
+        'dsn': SENTRY_DSN,
+        'release': raven.fetch_git_sha(BASE_DIR),
+    }

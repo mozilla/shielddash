@@ -1,3 +1,4 @@
+contextlib2==0.5.3
 dj-database-url==0.4.1
 Django==1.9.6
 djangorestframework==3.3.3
@@ -10,6 +11,7 @@ psycopg2==2.6.1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
 python-decouple==3.0
+raven==5.18.0
 requests==2.10.0
 rsa==3.4.2
 simplejson==3.8.2
