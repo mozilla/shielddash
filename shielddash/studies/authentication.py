@@ -46,7 +46,7 @@ class GoogleJSONWebTokenAuthentication(BaseAuthentication):
             if idinfo['iss'] not in ['accounts.google.com',
                                      'https://accounts.google.com']:
                 raise crypt.AppIdentityError("Wrong issuer.")
-            if idinfo['hd'] != settings.GOOGLE_AUTH_HOSTED_DOMAIN:
+            if idinfo.get('hd') != settings.GOOGLE_AUTH_HOSTED_DOMAIN:
                 raise crypt.AppIdentityError("Wrong hosted domain.")
         except crypt.AppIdentityError as e:
             raise exceptions.AuthenticationFailed(e)
