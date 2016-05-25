@@ -11,15 +11,17 @@ const StudyDetailsContainer = React.createClass({
   },
   render: function() {
     return (
-      <StudyDetails {...this.props.study} totals={this.props.totals} />
+      <StudyDetails {...this.props} />
     );
   }
 });
 
 const mapStateToProps = function(store) {
   return {
+    isFetching: store.studyState.isFetching,
     study: store.studyState.study,
-    totals: store.studyState.totals
+    totals: store.studyState.totals,
+    status: store.studyState.status
   };
 }
 

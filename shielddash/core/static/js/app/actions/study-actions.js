@@ -2,10 +2,23 @@ import * as types from './action-types';
 import {studyFields} from '../constants';
 
 
+export function getStudiesFetching() {
+  return {
+    type: types.GETTING_STUDIES
+  };
+}
+
 export function getStudiesSuccess(studies) {
   return {
     type: types.GET_STUDIES_SUCCESS,
     studies
+  };
+}
+
+export function getStudiesFailure(errCode) {
+  return {
+    type: types.GET_STUDIES_FAILURE,
+    status: errCode
   };
 }
 
@@ -40,6 +53,12 @@ const getAllTotals = function(study) {
   return result;
 }
 
+export function getStudyFetching() {
+  return {
+    type: types.GETTING_STUDY
+  };
+}
+
 export function getStudySuccess(study) {
   let totals = {
     release: getChannelTotals(study, 'release'),
@@ -52,5 +71,12 @@ export function getStudySuccess(study) {
     type: types.GET_STUDY_SUCCESS,
     study,
     totals
+  };
+}
+
+export function getStudyFailure(errCode) {
+  return {
+    type: types.GET_STUDY_FAILURE,
+    status: errCode
   };
 }

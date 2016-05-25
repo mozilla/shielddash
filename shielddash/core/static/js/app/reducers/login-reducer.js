@@ -13,7 +13,7 @@ const loginReducer = function(state = initialState, action) {
     case types.LOGIN_SUCCESS:
       return Object.assign({}, state, {user: action.user});
     case types.LOGOUT_SUCCESS:
-      return Object.assign({}, state, {user: action.user});
+      return Object.assign({}, state, {user: null});
   }
 
   return state;

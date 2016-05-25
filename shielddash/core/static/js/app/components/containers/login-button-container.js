@@ -13,7 +13,7 @@ const LoginContainer = React.createClass({
     loginApi.performSignOut();
   },
   _isSignedIn: function() {
-    return !!localStorage.user_token;
+    return !!localStorage.getItem('user_token');
   },
   componentDidMount: function() {
     gapi.load('auth2', function() {
@@ -31,7 +31,8 @@ const LoginContainer = React.createClass({
   },
   render: function() {
     return(
-      <LoginButton signedIn={this._isSignedIn()} email={localStorage.user_email} signIn={this._doSignIn} signOut={this._doSignOut} />
+      <LoginButton signedIn={this._isSignedIn()} email={localStorage.getItem('user_email')}
+                   signIn={this._doSignIn} signOut={this._doSignOut} />
     );
   }
 });

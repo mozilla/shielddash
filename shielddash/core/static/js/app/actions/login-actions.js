@@ -10,7 +10,6 @@ export function getLoginSuccess(user) {
 
 export function getLogoutSuccess() {
   return {
-    type: types.LOGOUT_SUCCESS,
-    user: null
+    type: types.LOGOUT_SUCCESS
   };
 }
