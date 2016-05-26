@@ -4,6 +4,7 @@ from rest_framework import filters
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from rest_framework.settings import api_settings
 
 from .filters import StudyFilter
 from .models import Study
@@ -48,6 +49,8 @@ def study_detail(request, study_id):
     data = {
         'study': study.name,
         'channels': {},
+        'startTime': study.start_time.strftime(api_settings.DATETIME_FORMAT),
+        'endTime': study.end_time.strftime(api_settings.DATETIME_FORMAT),
     }
     for row in rows:
         channel = row.pop('channel')
