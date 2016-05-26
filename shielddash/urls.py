@@ -21,9 +21,9 @@ from .studies.views import StudyListView, study_detail
 
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='shielddash/index.html'), name='index'),
     url(r'^studies/$', StudyListView.as_view(), name='study-list'),
     url(r'^studies/(?P<study_id>\d+)/$', study_detail, name='study-detail'),
     url(r'^example/$', TemplateView.as_view(template_name='example.html')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'.*', TemplateView.as_view(template_name='shielddash/index.html'), name='index')
 ]
