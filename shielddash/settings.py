@@ -122,6 +122,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'shielddash.studies.authentication.OptionsOrIsAuthenticated',
     ),
+    'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S",
 }
 
 

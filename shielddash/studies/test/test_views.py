@@ -5,15 +5,13 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils import timezone
 from rest_framework.reverse import reverse
+from rest_framework.settings import api_settings
 
 from ..models import State, Study
 
 
-def iso(dt):
-    value = dt.isoformat()
-    if value.endswith('+00:00'):
-        value = value[:-6] + 'Z'
-    return unicode(value)
+def dt_format(dt):
+    return unicode(dt.strftime(api_settings.DATETIME_FORMAT))
 
 
 def create_test_user():
@@ -72,8 +70,8 @@ class TestStudyView(TestCase):
                     u'id': self.study.id,
                     u'name': self.study.name,
                     u'description': self.study.description,
-                    u'start_time': iso(self.study.start_time),
-                    u'end_time': iso(self.study.end_time),
+                    u'start_time': dt_format(self.study.start_time),
+                    u'end_time': dt_format(self.study.end_time),
                 }
             ]
         })
@@ -141,6 +139,8 @@ class TestStudyDetailView(TestCase):
                          sorted(['release', 'beta', 'aurora', 'nightly']))
         self.assertEqual(sorted(data['channels']['release'].keys()),
                          sorted(['aggressive', 'medium', 'weak', 'ut']))
+        self.assertEqual(data['startTime'], dt_format(self.study.start_time))
+        self.assertEqual(data['endTime'], dt_format(self.study.end_time))
 
     def test_no_auth(self):
         response = self.client.get(self.url)
