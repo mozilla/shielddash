@@ -38,6 +38,14 @@ p {
   }
 }
 
+.primary-header-link {
+  text-decoration: none;
+
+  &:hover {
+    border-bottom: 1px solid $mild-blue;
+  }
+}
+
 .studies-list {
   list-style: none;
   margin: 35px 0 0;
@@ -61,7 +69,7 @@ p {
 
 .button {
   background-image: linear-gradient(-180deg, #BAD582 0%, #93AC67 100%);
-  box-shadow: 0 2px 0 0 rgba(0,0,0,0.08), 0 4px 10px 0 rgba(0,0,0,0.10), inset 0 1px 0 1px rgba(255,255,255,0.25), inset 0 -2px 0 1px rgba(0,0,0,0.25);
+  box-shadow: 0 0 0 0 rgba(0,0,0,0.08), 0 4px 10px 0 rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.25), inset 0 -1px 0 1px rgba(0,0,0,0.25);
   border-radius: 3px;
   height: 30px;
   line-height: 30px;
@@ -71,6 +79,10 @@ p {
   letter-spacing: 0;
   text-shadow: 0 -1px 0 #4F7311;
   cursor: pointer;
+
+  &:hover {
+    background-image: linear-gradient(-180deg, #BAD582 0%, #82965b 100%);
+  }
 }
 
 .sign-in-content {
@@ -158,11 +170,10 @@ p {
   }
   b {
     font-weight: 400;
-
-    &.percent {
-      color: $green-text;
-      display: none;
-    }
+  }
+  .percent {
+    color: $green-text;
+    display: none;
   }
 }
 
@@ -172,9 +183,7 @@ p {
 
 .study-field-faded,
 .study-field-faded .percent {
-  // Faded fields should always be this grayscale even if their
-  // class specific color (eg percents are green) is more specific.
-  color: rgba(0,0,0,0.4) !important;
+  color: rgba(0,0,0,0.4);
 }
 
 .component-error-message {
@@ -206,24 +215,28 @@ p {
   }
   .loading {
     display: block;
-    font-family: consolas, menlo, monaco, monospace;
-    font-size: 60px;
-    font-weight: bold;
-    height: 100%;
-    left: 50%;
-    margin: -30px 0 0 -20px;
-    opacity: 0.8;
-    position: absolute;
-    top: 50%;
-    width: 100%;
+  }
+}
 
-    span {
-      display: inline-block;
-      animation: pulse 0.4s alternate infinite ease-in-out;
+.loading {
+  display: none;
+  font-family: consolas, menlo, monaco, monospace;
+  font-size: 60px;
+  font-weight: bold;
+  height: 100%;
+  left: 50%;
+  margin: -30px 0 0 -20px;
+  opacity: 0.8;
+  position: absolute;
+  top: 50%;
+  width: 100%;
 
-      &:nth-child(odd) {
-        animation-delay: 0.4s;
-      }
+  span {
+    display: inline-block;
+    animation: pulse 0.4s alternate infinite ease-in-out;
+
+    &:nth-child(odd) {
+      animation-delay: 0.4s;
     }
   }
 }
@@ -242,25 +255,6 @@ p {
   justify-content: space-between;
   line-height: 20px;
 
-  .switch {
-    background: rgba(0,0,0,0.50);
-    border-radius: 30px;
-    box-shadow: inset 0 1px 5px 0 rgba(0,0,0,0.20);
-    cursor: pointer;
-    height: 20px;
-    margin: 0 7px;
-    position: relative;
-    width: 40px;
-
-    &.active {
-      background-image: linear-gradient(-179deg, #B8D380 0%, #93AC67 100%);
-      box-shadow: inset 0 1px 4px 0 rgba(0,0,0,0.36);
-
-      .handle {
-        left: 20px;
-      }
-    }
-  }
   .handle {
     background-image: linear-gradient(-180deg, #FAFAFA 0%, #EFF1F4 100%);
     border-radius: 30px;
@@ -271,5 +265,25 @@ p {
     position: absolute;
     transition: left 0.2s ease;
     width: 18px;
+  }
+}
+
+.switch {
+  background: rgba(0,0,0,0.50);
+  border-radius: 30px;
+  box-shadow: inset 0 1px 5px 0 rgba(0,0,0,0.20);
+  cursor: pointer;
+  height: 20px;
+  margin: 0 7px;
+  position: relative;
+  width: 40px;
+
+  &.active {
+    background-image: linear-gradient(-179deg, #B8D380 0%, #93AC67 100%);
+    box-shadow: inset 0 1px 4px 0 rgba(0,0,0,0.36);
+
+    .handle {
+      left: 20px;
+    }
   }
 }
