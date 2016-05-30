@@ -145,8 +145,9 @@ class TestStudyDetailView(TestCase):
     def test_no_auth(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 403)
-
+        self.assertIn('detail', response.json())
         self.client.login(username=self.user.username, password='password')
 
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+        self.assertNotIn('detail', response.json())
