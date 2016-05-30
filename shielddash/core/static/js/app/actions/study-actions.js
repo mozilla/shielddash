@@ -15,10 +15,11 @@ export function getStudiesSuccess(studies) {
   };
 }
 
-export function getStudiesFailure(errCode) {
+export function getStudiesFailure(response) {
   return {
     type: types.GET_STUDIES_FAILURE,
-    status: errCode
+    status: response.status,
+    detail: response.data.detail
   };
 }
 
@@ -74,10 +75,11 @@ export function getStudySuccess(study) {
   };
 }
 
-export function getStudyFailure(errCode) {
+export function getStudyFailure(response) {
   return {
     type: types.GET_STUDY_FAILURE,
-    status: errCode
+    status: response.status,
+    detail: response.data.detail
   };
 }
 

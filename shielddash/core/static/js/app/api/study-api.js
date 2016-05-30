@@ -31,9 +31,9 @@ export function getStudies() {
   return axios.get(endpoints.GET_STUDIES, {headers}).then(response => {
     store.dispatch(getStudiesSuccess(response.data));
     return response;
-  }).catch(err => {
-    console.error(err);
-    store.dispatch(getStudiesFailure(err.status));
+  }).catch(response => {
+    console.error(response);
+    store.dispatch(getStudiesFailure(response));
     return err;
   });
 }
@@ -45,9 +45,9 @@ export function getStudy(studyId) {
   return axios.get(endpoints.GET_STUDY + studyId + '/', {headers}).then(response => {
     store.dispatch(getStudySuccess(response.data));
     return response;
-  }).catch(err => {
-    console.error(err);
-    store.dispatch(getStudyFailure(err.status));
+  }).catch(response => {
+    console.error(response);
+    store.dispatch(getStudyFailure(response));
     return err;
   });
 }
