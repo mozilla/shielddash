@@ -4,6 +4,7 @@ import StudyTotalsRow from './study-totals-row';
 import FetchError from './fetch-error';
 import Loading from './loading';
 import PercentToggleContainer from '../containers/percent-toggle-container';
+import DateRange from './date-range';
 
 
 export default function(props) {
@@ -24,6 +25,7 @@ export default function(props) {
     <div className={classes.join(' ')}>
       <header>
         <h2 className="study-title">{props.study.study}</h2>
+        <DateRange startTime={props.study.startTime} endTime={props.study.endTime} />
         <PercentToggleContainer />
       </header>
       {Object.keys(props.study.channels).map(channelName => {

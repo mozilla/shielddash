@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import FetchError from './fetch-error';
 import Loading from './loading';
+import DateRange from './date-range';
 
 
 export default function(props) {
@@ -14,6 +15,7 @@ export default function(props) {
         return (
           <li key={study.id} className="study-list-item">
             <h2 className="study-list-heading"><Link to={'/studies/' + study.id}>{study.name}</Link></h2>
+            <DateRange startTime={study.start_time} endTime={study.end_time} />
             <p>{study.description}</p>
           </li>
         );
