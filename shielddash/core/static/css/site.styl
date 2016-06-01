@@ -126,12 +126,18 @@ p {
 
 .release-channel-title {
   border-bottom: 1px solid #000;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   padding: 0 0 10px;
 }
 
 .study-wrapper {
+  article {
+    margin-top: 40px;
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
   header {
     display: flex;
     justify-content: space-between;
@@ -158,10 +164,9 @@ p {
   line-height: 25px;
 
   > * {
-    font-size: 12px;
     font-weight: 400;
     color: $emphasis-text;
-    margin: 0;
+    margin: 7px;
     text-align: center;
     width: 11%;
 
