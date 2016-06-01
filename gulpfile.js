@@ -10,6 +10,7 @@ var concat = require('gulp-concat');
 require('es6-promise').polyfill();
 
 var ROOT = './';
+var JS = path.resolve(ROOT, 'shielddash/core/static/js');
 var CSS = path.resolve(ROOT, 'shielddash/core/static/css');
 
 // Webpack
@@ -31,6 +32,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('watch', ['build'], function() {
+  gulp.watch([path.resolve(JS, '**/*.js'), '!' + path.resolve(JS, 'bundle.js')], ['webpack']);
   gulp.watch(path.resolve(CSS, '**/*.styl'), ['css']);
 });
 
