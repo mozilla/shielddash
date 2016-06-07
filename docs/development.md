@@ -1,10 +1,11 @@
 # Running the SHIELD Dashboard locally
 
-1. `echo DEBUG=True >> .env`
+1. `echo DEBUG=true >> .env`
 2. `virtualenv env`
 3. `source env/bin/activate`
 4. `pip install -r requirements.txt`
 5. `npm install`
+9. (optional) `echo PROD_API=true >> .env` for using the prod (https://shielddash.herokuapp.com) and not the dev (http://localhost:8000) API
 6. `gulp build`
 7. Set up the database
     1. Install postgres

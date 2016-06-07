@@ -22,6 +22,7 @@ const mapStateToProps = function(store) {
     study: store.studyState.study,
     totals: store.studyState.totals,
     status: store.studyState.status,
+    detail: store.studyState.detail,
     showPercentage: store.studyState.showPercentage
   };
 }

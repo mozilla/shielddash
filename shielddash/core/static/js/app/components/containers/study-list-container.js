@@ -20,6 +20,7 @@ const mapStateToProps = function(store) {
   return {
     isFetching: store.studyState.isFetching,
     studies: store.studyState.studies,
+    detail: store.studyState.detail,
     status: store.studyState.status
   };
 };

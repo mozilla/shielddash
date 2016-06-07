@@ -37,14 +37,14 @@ const studyReducer = function(state = initialState, action) {
     case types.GET_STUDIES_SUCCESS:
       return Object.assign({}, state, {isFetching: false, studies: action.studies.studies});
     case types.GET_STUDIES_FAILURE:
-      return Object.assign({}, state, {isFetching: false, status: action.status});
+      return Object.assign({}, state, {isFetching: false, status: action.status, detail: action.detail});
 
     case types.GETTING_STUDY:
       return Object.assign({}, state, {isFetching: true});
     case types.GET_STUDY_SUCCESS:
       return Object.assign({}, state, {isFetching: false, study: action.study, totals: action.totals, startTime: action.study.startTime, endTime: action.study.endTime});
     case types.GET_STUDY_FAILURE:
-      return Object.assign({}, state, {isFetching: false, status: action.status});
+      return Object.assign({}, state, {isFetching: false, status: action.status, detail: action.detail});
 
     case types.SHOW_PERCENT_VALUES:
       return Object.assign({}, state, {showPercentage: true});

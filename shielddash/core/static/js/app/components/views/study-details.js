@@ -9,7 +9,7 @@ import DateRange from './date-range';
 
 export default function(props) {
   if (props.status !== 200) {
-    return (<FetchError status={props.status} />);
+    return (<FetchError status={props.status} detail={props.detail} />);
   }
 
   let classes = ['study-wrapper'];

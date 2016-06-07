@@ -47,7 +47,10 @@ class GoogleJSONWebTokenAuthentication(BaseAuthentication):
                                      'https://accounts.google.com']:
                 raise crypt.AppIdentityError("Wrong issuer.")
             if idinfo.get('hd') != settings.GOOGLE_AUTH_HOSTED_DOMAIN:
-                raise crypt.AppIdentityError("Wrong hosted domain.")
+                raise crypt.AppIdentityError(
+                    "Your Google account doesn't belong to the hosted domain "
+                    "this app is configured for (%s)." %
+                    settings.GOOGLE_AUTH_HOSTED_DOMAIN)
         except crypt.AppIdentityError as e:
             raise exceptions.AuthenticationFailed(e)
 

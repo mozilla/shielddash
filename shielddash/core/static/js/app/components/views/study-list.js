@@ -27,7 +27,7 @@ function listStudy(study) {
 
 export default function(props) {
   if (props.status !== 200) {
-    return (<FetchError status={props.status} />);
+    return (<FetchError status={props.status} detail={props.detail} />);
   }
 
   var now = Date.now();

@@ -5,9 +5,9 @@ import {
   getStudyFetching, getStudySuccess, getStudyFailure
 } from '../actions/study-actions';
 
-const mockEndpoints = {
-  GET_STUDIES: 'http://localhost:3009/studies',
-  GET_STUDY: 'http://localhost:3009/studys/'
+const devEndpoints = {
+  GET_STUDIES: 'http://localhost:8000/studies/',
+  GET_STUDY: 'http://localhost:8000/studies/'
 };
 
 const prodEndpoints = {
@@ -15,8 +15,7 @@ const prodEndpoints = {
   GET_STUDY: 'https://shielddash.herokuapp.com/studies/'
 }
 
-// TODO: Check node environment to set this.
-const endpoints = process.env.NODE_ENV === 'dev' ? mockEndpoints : prodEndpoints;
+const endpoints = __PROD_API__ ? prodEndpoints : devEndpoints;
 
 // Auth token from LS.
 let jwt = localStorage.getItem('user_token');
@@ -34,7 +33,7 @@ export function getStudies() {
   }).catch(response => {
     console.error(response);
     store.dispatch(getStudiesFailure(response));
-    return err;
+    return response;
   });
 }
 
@@ -48,6 +47,6 @@ export function getStudy(studyId) {
   }).catch(response => {
     console.error(response);
     store.dispatch(getStudyFailure(response));
-    return err;
+    return response;
   });
 }
