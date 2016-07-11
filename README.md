@@ -11,7 +11,7 @@ Get started with local development:
 
 ```shell
 which postgres || echo "postgres not installed" && exit 1
-createuser --pwprompt shielddash
+createuser --pwprompt shielddash # set password to: shielddash
 createdb -Oshielddash -Eutf8 shielddash
 postgres -D /usr/local/var/postgres
 
